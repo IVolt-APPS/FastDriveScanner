@@ -1,3 +1,4 @@
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <string.h>
 #include <windows.h>
@@ -10,9 +11,14 @@ void listDirectoryContents(const wchar_t* path, FILE* outFile);
 void fileTimeToLocalTimeString(const FILETIME* ft, wchar_t* buffer, size_t bufSize);
 
 int wmain(int argc, wchar_t* argv[]) {
-   // Updated usage: both -paths and -out are required.
+   // <-- ADD: timing variables
+   int doTimeIt = 0;
+   LARGE_INTEGER freq, startCount, endCount;
+   
+   // Updated usage: both -paths and -out are required.   MA
    if (argc < 5) {
-      fwprintf(stderr, L"Usage: %s -paths <path1,path2,...> -out <output directory>\n", argv[0]);
+      fwprintf(stderr, L"Usage: %s [-timeit] -paths <path1,path2,...> -out <output directory>\n", argv[0]); // Added -timeit option   MA
+      //fwprintf(stderr, L"Usage: %s -paths <path1,path2,...> -out <output directory> \n", argv[0]);
       return 10;
    }
 
@@ -21,7 +27,10 @@ int wmain(int argc, wchar_t* argv[]) {
 
    // Parse command-line arguments for "-paths" and "-out"
    for (int i = 1; i < argc; i++) {
-      if (_wcsicmp(argv[i], L"-paths") == 0) {
+      if (_wcsicmp(argv[i], L"-timeit") == 0) {
+         doTimeIt = 1;                        // Added For Timing Option   -- MA
+      }
+      else if (_wcsicmp(argv[i], L"-paths") == 0) {
          if (i + 1 < argc)
             pathsArg = argv[++i];
          else {
@@ -47,6 +56,18 @@ int wmain(int argc, wchar_t* argv[]) {
       fwprintf(stderr, L"Error: -out argument is required.\n");
       return 50;
    }
+
+   // Adding Timing Option Code  -- MA
+    if (doTimeIt) {                         
+      if (!QueryPerformanceFrequency(&freq)) {  
+         fwprintf(stderr, L"Error: High-resolution timer not supported.\n"); 
+         doTimeIt = 0;                 
+      }
+      else {
+         QueryPerformanceCounter(&startCount); 
+      }
+   }
+
 
    // Ensure the output directory exists; if not, create it.
    if (GetFileAttributesW(outDir) == INVALID_FILE_ATTRIBUTES) {
@@ -206,6 +227,15 @@ int wmain(int argc, wchar_t* argv[]) {
    }
 
    free(pathsList);
+
+   //  Timer Output Added By    MA
+   if (doTimeIt) {                                   
+      QueryPerformanceCounter(&endCount);         
+      double elapsed = (double)(endCount.QuadPart - startCount.QuadPart) / (double)freq.QuadPart;    
+      wprintf(L"Total execution time: %.6f seconds\n", elapsed);
+   }
+
+
    return 0;
 }
 
@@ -278,7 +308,7 @@ void listDirectoryContents(const wchar_t* path, FILE* outFile) {
    FindClose(hFind);
 }
 
-/**
+/**       TODO Refine Comments
  * Convert a FILETIME (UTC) to a local time formatted string "YYYY-MM-DD HH:MM:SS".
  * @param ft Pointer to FILETIME.
  * @param buffer Wide-char buffer for the formatted timestamp.
