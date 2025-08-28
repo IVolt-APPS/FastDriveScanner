@@ -1,83 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="17.4" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
+    <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
+    <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+
   <PropertyGroup Label="Globals">
     <ProjectGuid>{87d31f98-315c-433f-8178-2f9e0f3f3395}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>FastDriveScan</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>17.4.34</_ProjectFileVersion>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-     <ClCompile>
-       <CompileAs>CompileAsC</CompileAs>
-       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;_UNICODE;_WIN32_WINNT=0x0601;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-       <AdditionalOptions>/std:c11 %(AdditionalOptions)</AdditionalOptions>
-       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-       <WarningLevel>Level4</WarningLevel>
-       <BufferSecurityCheck>true</BufferSecurityCheck>
-       <Optimization>Disabled</Optimization>
-     </ClCompile>
-     <Link>
-       <SubSystem>Console</SubSystem>
-       <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-     </Link>
-   </ItemDefinitionGroup>
-   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-     <ClCompile>
-       <CompileAs>CompileAsC</CompileAs>
-       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;_UNICODE;_WIN32_WINNT=0x0601;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-       <AdditionalOptions>/std:c11 %(AdditionalOptions)</AdditionalOptions>
-       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-       <WarningLevel>Level4</WarningLevel>
-       <BufferSecurityCheck>true</BufferSecurityCheck>
-       <Optimization>MaxSpeed</Optimization>
-       <FunctionLevelLinking>true</FunctionLevelLinking>
-       <IntrinsicFunctions>true</IntrinsicFunctions>
-     </ClCompile>
-     <Link>
-       <SubSystem>Console</SubSystem>
-       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-       <OptimizeReferences>true</OptimizeReferences>
-     </Link>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <CompileAs>CompileAsC</CompileAs>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;_UNICODE;_WIN32_WINNT=0x0601;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/std:c11 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
+    </Link>
   </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <CompileAs>CompileAsC</CompileAs>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;_UNICODE;_WIN32_WINNT=0x0601;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/std:c11 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+
   <ItemGroup>
     <ClCompile Include="program.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program.h" />
   </ItemGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
